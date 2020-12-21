@@ -63,7 +63,8 @@ public class PushExample {
     }
 
     // 使用 NettyHttpClient 异步接口发送请求
-    public static void testSendPushWithCallback() {
+    @Test
+    public void testSendPushWithCallback() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         String host = (String) clientConfig.get(ClientConfig.PUSH_HOST_NAME);
         final NettyHttpClient client = new NettyHttpClient(ServiceHelper.getBasicAuthorization(APP_KEY, MASTER_SECRET),
@@ -82,7 +83,8 @@ public class PushExample {
         }
     }
 
-    public static void testSendPush() {
+    @Test
+    public void testSendPush() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
 //        String authCode = ServiceHelper.getBasicAuthorization(APP_KEY, MASTER_SECRET);
@@ -117,7 +119,8 @@ public class PushExample {
         }
     }
 
-    public static void testSendPushWithEncrypt() {
+    @Test
+    public void testSendPushWithEncrypt() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         clientConfig.setEncryptType(EncryptKeys.ENCRYPT_SMS2_TYPE);
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
@@ -154,14 +157,15 @@ public class PushExample {
     }
 
     //use String to build PushPayload instance
-    public static void testSendPush_fromJSON() {
+    @Test
+    public void testSendPush_fromJSON() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(PlatformNotification.class, new InterfaceAdapter<PlatformNotification>())
                 .create();
         // Since the type of DeviceType is enum, thus the value should be uppercase, same with the AudienceType.
-        String payloadString = "{\"platform\":{\"all\":false,\"deviceTypes\":[\"IOS\"]},\"audience\":{\"all\":true,\"targets\":[{\"audienceType\":\"TAG_AND\",\"values\":[\"tag1\",\"tag_all\"]}]},\"notification\":{\"notifications\":[{\"soundDisabled\":false,\"badgeDisabled\":false,\"sound\":\"happy\",\"badge\":\"5\",\"contentAvailable\":false,\"alert\":\"Test from API Example - alert\",\"extras\":{\"from\":\"JPush\"},\"type\":\"cn.jpush.api.push.model.notification.IosNotification\"}]},\"message\":{\"msgContent\":\"Test from API Example - msgContent\"},\"options\":{\"sendno\":1429488213,\"overrideMsgId\":0,\"timeToLive\":-1,\"apnsProduction\":true,\"bigPushDuration\":0}}";
+        String payloadString = "{\"platform\":[\"android\"],\"audience\":{\"all\":true,\"targets\":[{\"audienceType\":\"TAG_AND\",\"values\":[\"tag1\",\"tag_all\"]}]},\"notification\":{\"notifications\":[{\"soundDisabled\":false,\"badgeDisabled\":false,\"sound\":\"happy\",\"badge\":\"5\",\"contentAvailable\":false,\"alert\":\"Test from API Example - alert\",\"extras\":{\"from\":\"JPush\"},\"type\":\"cn.jpush.api.push.model.notification.IosNotification\"}]},\"message\":{\"msgContent\":\"Test from API Example - msgContent\"},\"options\":{\"sendno\":1429488213,\"overrideMsgId\":0,\"timeToLive\":-1,\"apnsProduction\":true,\"bigPushDuration\":0}}";
         PushPayload payload = gson.fromJson(payloadString, PushPayload.class);
         try {
             PushResult result = jpushClient.sendPush(payloadString);
@@ -184,7 +188,8 @@ public class PushExample {
     /**
      * 测试多线程发送 2000 条推送耗时
      */
-    public static void testSendPushes() {
+    @Test
+    public void testSendPushes() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
         String authCode = ServiceHelper.getBasicAuthorization(APP_KEY, MASTER_SECRET);
@@ -225,6 +230,7 @@ public class PushExample {
         }
     }
 
+    @Test
     public void testSendGroupPush() {
         GroupPushClient groupPushClient = new GroupPushClient(GROUP_MASTER_SECRET, GROUP_PUSH_KEY);
         final PushPayload payload = buildPushObject_android_and_ios();
