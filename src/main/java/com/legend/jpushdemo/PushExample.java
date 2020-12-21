@@ -434,7 +434,8 @@ public class PushExample {
                 .build();
     }
 
-    public static void testSendPushWithCustomConfig() {
+    @Test
+    public void testSendPushWithCustomConfig() {
         ClientConfig config = ClientConfig.getInstance();
         // Setup the custom hostname
         config.setPushHostName("https://api.jpush.cn");
@@ -460,7 +461,8 @@ public class PushExample {
         }
     }
 
-    public static void testSendIosAlert() {
+    @Test
+    public void testSendIosAlert() {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
 
         IosAlert alert = IosAlert.newBuilder()
@@ -480,7 +482,8 @@ public class PushExample {
         }
     }
 
-    public static void testSendWithSMS() {
+    @Test
+    public void testSendWithSMS() {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
         try {
 //            SMS sms = SMS.content(1, 10);
@@ -501,7 +504,8 @@ public class PushExample {
         }
     }
 
-    public static void testGetCidList() {
+    @Test
+    public void testGetCidList() {
         JPushClient jPushClient = new JPushClient(MASTER_SECRET, APP_KEY);
         try {
             CIDResult result = jPushClient.getCidList(3, "push");
@@ -516,7 +520,8 @@ public class PushExample {
         }
     }
 
-    public static void testSendPushWithCid() {
+    @Test
+    public void testSendPushWithCid() {
         JPushClient jPushClient = new JPushClient(MASTER_SECRET, APP_KEY);
         PushPayload pushPayload = buildPushObject_android_cid();
         try {
@@ -536,7 +541,8 @@ public class PushExample {
      * 批量单推接口
      * https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip
      */
-    public static void testBatchSend() {
+    @Test
+    public void testBatchSend() {
 
         JPushClient jPushClient = new JPushClient(MASTER_SECRET, APP_KEY);
         try {
@@ -601,7 +607,8 @@ public class PushExample {
     /**
      * 自定义发送参数名称, 华为客户可参考该方法
      */
-    public static void testSendPushWithCustomField() {
+    @Test
+    public void testSendPushWithCustomField() {
 
         ClientConfig config = ClientConfig.getInstance();
         // Setup the custom hostname
