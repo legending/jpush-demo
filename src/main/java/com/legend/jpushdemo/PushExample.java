@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.netty.handler.codec.http.HttpMethod;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +49,7 @@ public class PushExample {
     public static void main(String[] args) {
 
         // 回调参数可参考下面方法
-        testSendPushWithCustom();
+//        testSendPushWithCustom();
 //        testSendPushWithCustomField();
 //        testBatchSend();
 //        testSendPushWithCustomConfig();
@@ -637,7 +638,8 @@ public class PushExample {
     /**
      * 回调参数示例
      */
-    public static void testSendPushWithCustom() {
+    @Test
+    public void testSendPushWithCustom() {
 
         ClientConfig config = ClientConfig.getInstance();
         // Setup the custom hostname
